@@ -7,15 +7,126 @@
   <link rel="manifest" href="/manifest.json">
 <body>
 <nav>
-  <h1>VM PWA</h1>
+  <h1>Barter-ru</h1>
 </nav>
-<header>
-  <h2>Изучаем PWA, manifest, Service Workers</h2>
-</header>
-<div class="container">
-  <div id="posts"></div>
-</div>
 
+<header>
+    <div id="logo" onclick="slowScroll('#top')">
+      <span>Barter-ru</span>
+    </div>
+    <div id="about">
+      <a href="#" title="Возможности" onclick="slowScroll('#main')">Возможности</a>
+      <a href="#" onclick="slowScroll('#overview')" title="Преимущества">Преимущества</a>
+      <a href="#" onclick="slowScroll('#contacts')" title="Контакты">Оставить отзыв</a>
+      <a href="#" onclick="slowScroll('#faq')" title="Ответы на вопросы">Ответы на вопросы</a>
+    </div>
+    <br>
+      
+  </header>
+
+  <div id="top">
+    <h1>Бартерный обмен -</h1>
+    <h3>это удобно</h3>
+    <br>
+    <h5>Совсем скоро приложение будет доступно на всех платформах</h5>
+  </div>
+
+  <div id="main">
+    <div class="intro">
+      <h2>Удобное приложение для обмена товаров</h2>
+      <span>Обменивайте любые товары. Чтобы не искать покупателя, Вы можете найти того, кто захочет с Вами обменяться товарами.</span>
+    </div>
+    <div class="text">
+      <span>Для компаний предусмотрена функция оптового обмена штучных товаров. Например, если компания не смогла продать нужное количество товаров, то она сможет обменять их оптом на другие товары компании, которая захочет обменться с ней.</span>
+    </div>
+  </div>
+
+  <div id="overview">
+    <h2>Преимущества</h2>
+    <h4>В нашем приложении есть функция доплаты, если у Вас нет подходящего товара для обмена.</h4>
+
+    <div class="img">
+      <img src="file.png.png" alt="">
+      <span>Приложение будет доступно на всех операционных системах</span>
+    </div>
+    <div class="img">
+      <img src="barter_exchange.png" alt="">
+      <span>Обмениваться товарами - это просто</span>
+    </div>
+  </div>
+
+  <div id="contacts">
+    <center><h5>Оставьте, пожалуйста, отзыв о нашем приложении</h5></center>
+    <form action = "send.php" method = "post" id="form_input">
+      <input type="text" placeholder="Введите имя" name="name" id="name" required><br>
+			<input type="email" placeholder="Введите email" name="email" id="email" required><br>
+			<textarea placeholder="Введите ваше сообщение" name="message" id="message" required></textarea><br>
+			<div id="mess_send"><input type = "submit"></div>
+    </form>
+  </div>
+
+  <div id="faq">
+    <div>
+      <span class="title">Оплата</span><br>
+      <span class="heading">Как будет проходит обмен?</span>
+      <p>Вам протсто нужно встретиться с продавцом вживую или отправить и получить товары, которые Вы обмениваете.</p>
+    </div>
+    <div>
+      <span class="title">Информация</span><br>
+      <span class="heading">Что входит в услуги сервиса?</span>
+      <p>Наше приложение предоставляет услуги бартерного обмена, также имеется функция доплаты.</p>
+    </div>
+    <div>
+      <span class="title">Гарантии</span><br>
+      <span class="heading">Можно ли написать продавцу?</span>
+      <p>Да, в нашем приложении есть функция отправки сообщений.</p>
+    </div>
+  </div>
+    
+
+
+<div id="faq">
+    <div>
+      <span class="title">Отзывы</span><br>
+ 
+  
+      <? 
+        $comments = $connect->query("SELECT * FROM data.values");
+        $comments = $comments->fetchALL(PDO::FETCH_ASSOC);
+        foreach($comments as $message ) {
+      ?>
+  <table>      
+  <tr><th>Имя пользоавтеля:</th><th>Почта:</th><th>Сообщение:</th><th>Дата:</th></tr>
+    <tr><td><?=$message['name']?></td><td><?=$message['email']?></td> <td><?=$message['message']?></td><td>
+      <?=$message['date']?></td></tr>
+  
+      </table>
+    <? } ?>
+
+    </div>
+  
+  </div>
+
+  
 <script src="js/app.js"></script>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    function slowScroll(id) {
+      $('html, body').animate({
+        scrollTop: $(id).offset().top
+      }, 500);
+    }
+
+    $(document).on("scroll", function () {
+      if($(window).scrollTop() === 0)
+        $("header").removeClass("fixed");
+      else
+        $("header").attr("class", "fixed");
+    });
+  </script>
+
+  
 </body>
 </html>
