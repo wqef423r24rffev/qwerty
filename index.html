@@ -15,30 +15,10 @@
 <body>
   <header>
       <span>Barter-ru</span>
- 
-   
-      <a href="#" title="Возможности" onclick="slowScroll('#main')">Возможности</a>
-      <a href="#" onclick="slowScroll('#overview')" title="Преимущества">Преимущества</a>
-      <a href="#" onclick="slowScroll('#contacts')" title="Контакты">Оставить отзыв</a>
-      <a href="#" onclick="slowScroll('#faq')" title="Ответы на вопросы">Ответы на вопросы</a>
-    <br>
+
       
   </header>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script>
-    function slowScroll(id) {
-      $('html, body').animate({
-        scrollTop: $(id).offset().top
-      }, 500);
-    }
 
-    $(document).on("scroll", function () {
-      if($(window).scrollTop() === 0)
-        $("header").removeClass("fixed");
-      else
-        $("header").attr("class", "fixed");
-    });
-  </script>
 </body>
 </html>
